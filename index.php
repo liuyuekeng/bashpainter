@@ -2,7 +2,9 @@
 <html>
     <head></head>
     <body>
+        每行字符数:<input type="text" id="colSize" value="120"><br>
         <input type="file" id="upLoadImg"><br>
+        <input type="button" id="build" value="生成">
         <canvas id="myCanvas" width="10px" height="10px"></canvas><br>
         <textarea id="output" rows="30" cols="80"></textarea>
         <script>
@@ -11,14 +13,17 @@
     var param = {
         width: '',      //缩放后绘制用的宽
         height: '',     //缩放后绘制用的高
-        scale: 0.4,     //缩放比例
+        colSize: 120,   //默认每行字符数
+        scale: 0,       //缩放比例
         ctx: {},        //canvas的context对象
         ret: [],        //bash中背景色编码
         str: "",        //最终生成的字符串
-        filter: "231",  //排除底色，这里滤掉的是白色
+        filter: 231,    //排除底色，这里滤掉的是白色
         img: "",        //图片路径
         output: document.getElementById("output"),          //最终输出字符串的dome节点
         inputElement: document.getElementById("upLoadImg"),     //上传图片节点
+        colSizeItem: document.getElementById("colSize"),        //设置宽度节点
+        button: document.getElementById("build"),               //生成按钮
     }
 
     function paintInit () {
@@ -31,6 +36,8 @@
         //绘制图片
         var img = new Image();
         img.onload = function() {
+            param.scale = param.colSize / img.width;
+            console.log(param.scale);
             param.width = parseInt(img.width * param.scale);
             param.height = parseInt(img.height * param.scale);
             if ( param.height % 2 !== 0 ) {
@@ -122,14 +129,24 @@
         }
     }
 
+    param.button.onclick = function (e) {
+        if (param.img && param.colSize) {
+            paintInit();
+        } else {
+            alert("请先选择参数\nPlease fill params first");
+        }
+    }
     param.inputElement.onchange = function (e) {
         var fileType = e.target.files[0].type
         if (fileType === "image/jpeg" || fileType === "image/png" ) {
             param.img = URL.createObjectURL(e.target.files[0]);
-            paintInit();
         } else {
             alert("只支持jpg或png\nsupport jpg&png only");
         }
+    }
+    param.colSizeItem.onchange = function (e) {
+        var val = e.target;
+        param.colSize = val.value;
     }
 
 })();
