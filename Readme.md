@@ -28,6 +28,6 @@ Bash painter
 
 ### 字符宽度不一致
 宽字符导致图像变形，如图<br>
-![example-doge](https://raw.githubusercontent.com/liuyuekeng/staticFilesForReadme/master/bashpainter/error-example1.jpg)
-以Xshell为例，在设置中把“不确定字符作宽字符处理”选项去掉
-![example-doge](https://raw.githubusercontent.com/liuyuekeng/staticFilesForReadme/master/bashpainter/error-example2.jpg)
+![example-doge](https://raw.githubusercontent.com/liuyuekeng/staticFilesForReadme/master/bashpainter/error-example1.jpg)<br>
+以Xshell为例，在设置中把“不确定字符作宽字符处理”选项去掉<br>
+![example-doge](https://raw.githubusercontent.com/liuyuekeng/staticFilesForReadme/master/bashpainter/error-example2.jpg)<br>
