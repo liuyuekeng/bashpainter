@@ -4,7 +4,8 @@ Bash painter
 部署
 -----------------------------------
 
-这是一个纯静态的页面，将代码部署在web服务器上即可访问
+这是一个纯静态的页面，将代码部署在web服务器上即可访问(比如github)，你可以访问我的<br>
+[liuyuekeng.github.io/bashpainter/](http://liuyuekeng.github.io/bashpainter/)
 
 使用方法
 -----------------------------------
