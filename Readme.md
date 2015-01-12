@@ -33,3 +33,17 @@ Bash painter
 ![example-doge](https://raw.githubusercontent.com/liuyuekeng/staticFilesForReadme/master/bashpainter/error-example1.jpg)<br>
 以Xshell为例，在设置中把“不确定字符作宽字符处理”选项去掉<br>
 ![example-doge](https://raw.githubusercontent.com/liuyuekeng/staticFilesForReadme/master/bashpainter/error-example2.jpg)<br>
+
+实现原理
+-----------------------------------
+
+### 流程
+获取图片信息=>图像缩放=>颜色处理=>生成ANSI控制符=>输出
+
+### 图片上传
+获取用户图片，使用标签
+
+    <input type="file" >
+出于安全的考虑，我们并不能拿到用户选择的本地文件完整路径。
+[http://stackoverflow.com/questions/15201071/how-to-get-full-path-of-selected-file-on-change-of-input-type-file-using-jav](http://stackoverflow.com/questions/15201071/how-to-get-full-path-of-selected-file-on-change-of-input-type-file-using-jav)
+而实际上，我们并不需要得到完整路径，也可以使用用户选择的文件
