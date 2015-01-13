@@ -62,3 +62,26 @@ Bash painter
 getImageData取得的对象包含width,height,data三个属性，其中data是一个数组，包含像素的颜色信息，形如
 
     [R,G,B,A,R,G,B,A,R,G,B,A...]
+
+### 颜色处理
+
+使用ANSI控制符控制输出颜色有一个限制，只能支持216色的模式，也就是所谓的安全色。
+RGB每一个原色只支持6阶。6*6*6 = 216
+简单来说就是建立一个0~255 =》 0~6 的映射。得到的rgb三个数值结果我们将它视为6进制的三位，转换成10进制
+
+    num = r * 36 + g * 6 + b
+
+由于前面有16个特殊颜色位，所以最终要的颜色编码要加上16的偏移量，这个值一会儿就回用到。
+
+### ANSI控制字符
+
+[http://en.wikipedia.org/wiki/ANSI_escape_code](ANSI_escape_code)
+在维基百科查到有这么多得控制符，这里我们只会用到两个
+![escapecode](https://raw.githubusercontent.com/liuyuekeng/staticFilesForReadme/master/bashpainter/escapecode.png)<br>
+前景色和背景色的设置
+设定背景色之后打一个空格，会有一个长条形的方块，然后我们打出这个字符▄，他占据了空格位置一半的高度，所以我们在每一个空格的位置可以分成上下两块，分别用背景色和字符色进行填充，构成基本的色块单位。
+
+  echo -e "\033[38;5;1m\033[48;5;2m▄\033[0m"
+
+![show-escapecode](https://raw.githubusercontent.com/liuyuekeng/staticFilesForReadme/master/bashpainter/show-escapecode.png)<br>
+这段代码\033是esc对应地编码，随后设置了背景绿色，字符红色，打出一个方块，最后返回默认设置
