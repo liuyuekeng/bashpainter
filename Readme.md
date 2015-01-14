@@ -49,11 +49,11 @@ Bash painter
 
     <input type="file" >
 出于安全的考虑，我们并不能拿到用户选择的本地文件完整路径。
-[http://stackoverflow.com/questions/15201071/how-to-get-full-path-of-selected-file-on-change-of-input-type-file-using-jav](How to get full path of selected file on change of <input type=‘file’> using javascript, jquery-ajax?)
+[http://stackoverflow.com/questions/15201071/how-to-get-full-path-of-selected-file-on-change-of-input-type-file-using-jav](How to get full path of selected file on change of <input type=‘file’> using javascript, jquery-ajax?)<br>
 而实际上，我们并不需要得到完整路径，也可以使用用户选择的文件。
 通过URL.createObjectURL方法可以让浏览器为我们生成一个虚拟路径，可以像普通路径一样引用。
-[https://developer.mozilla.org/zh-CN/docs/Web/API/URL.createObjectURL](API文档)
-[http://caniuse.com/#search=createObjectURL](兼容性)
+[https://developer.mozilla.org/zh-CN/docs/Web/API/URL.createObjectURL](API文档)<br>
+[http://caniuse.com/#search=createObjectURL](兼容性)<br>
 
 ### 图像处理
 
@@ -81,7 +81,12 @@ RGB每一个原色只支持6阶。6*6*6 = 216
 前景色和背景色的设置
 设定背景色之后打一个空格，会有一个长条形的方块，然后我们打出这个字符▄，他占据了空格位置一半的高度，所以我们在每一个空格的位置可以分成上下两块，分别用背景色和字符色进行填充，构成基本的色块单位。
 
-  echo -e "\033[38;5;1m\033[48;5;2m▄\033[0m"
+    echo -e "\033[38;5;1m\033[48;5;2m▄\033[0m"
 
 ![show-escapecode](https://raw.githubusercontent.com/liuyuekeng/staticFilesForReadme/master/bashpainter/show-escapecode.png)<br>
 这段代码\033是esc对应地编码，随后设置了背景绿色，字符红色，打出一个方块，最后返回默认设置
+
+### 压缩
+
+上面这几个点了解之后，剩下的工作基本就是字符串拼接等操作了。有一点需要注意
+控制符设置颜色之后是一直生效的，所以没必要对每一个像素重复设置颜色，处理后可大大压缩字符串体积。
